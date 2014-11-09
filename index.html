@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="cattleControl">
+	<head>
+		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+		<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootsrap.min.js"></script>
+		<script type="text/javascript" src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+		<script type="text/javascript" src="app/app.js"></script>
+	</head>
+	<body>
+		<div ng-controller="cattleController as cc" >
+			<form name="cattle" ng-submit="cc.addCattle()" novalidate>
+				<input type="number" ng-model="cc.cattle.number" required \>
+				<select ng-model="cc.cattle.type" required>
+					<option value="vaca">Vaca</option>
+					<option value="vaca">Boi</option>
+				</select>
+				<input type="number" ng-model="cc.cattle.age" required \>
+				<select ng-model="cc.cattle.color" required>
+					<option value="branco">branco</option>
+					<option value="preto">preto</option>
+				</select>
+				<select ng-model="cc.cattle.hasHorns" required>
+					<option value="sim">Sim</option>
+					<option value="nao">Nao</option>
+				</select>
+				<input type="submit" value="salvar">
+			</form>
+			<table>
+				<tr>
+					<td>Numero</td>
+					<td>Tipo</td>
+					<td>Idade</td>
+					<td>Cor</td>
+					<td>Tem chifres</td>
+				</tr>
+				<tr ng-repeat="cattle in cc.cattles">
+					<td>{{cattle.number}}</td>
+					<td>{{cattle.type}}</td>
+					<td>{{cattle.age}}</td>
+					<td>{{cattle.color}}</td>
+					<td>{{cattle.hasHorns}}</td>
+				</tr>
+			</table>
+		</div>	
+	</body>
+</html>
