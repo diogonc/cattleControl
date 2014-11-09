@@ -6,6 +6,18 @@
 	    .setPrefix('cattleControl');
 	});
 
+	app.controller('navigationController', function(){
+		this.tab = 'cattle';
+
+		this.selectTab = function(tab){
+			this.tab = tab;
+		};
+
+		this.isSelected = function(tab){
+			return this.tab === tab;
+		};
+	});
+
 	app.controller('cattleController', function($scope, localStorageService){
 		this.cattle = cattle;
 		this.cattles = localStorageService.get('cattles');
@@ -20,33 +32,11 @@
 	});
 
 	var cattle = {
+		field:'leiteiras',
 		number:2,
 		type: 'vaca',
 		age:1,
 		color:'branco',
 		hasHorns:'sim'
 	};
-
-	var cattles = [	{
-					number:0,
-					type: 'vaca',
-					age:1,
-					color:'branco',
-					hasHorns:'sim'
-				},
-				{
-					number:1,
-					type: 'vaca',
-					age:1,
-					color:'branco',
-					hasHorns:'nao'
-				},
-				{
-					number:2,
-					type: 'vaca',
-					age:1,
-					color:'branco',
-					hasHorns:'sim'	
-				}
-	]
 })();
