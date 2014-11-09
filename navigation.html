@@ -1,59 +1,44 @@
-<!DOCTYPE html>
-<html ng-app="cattleControl">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <title>Cattle control</title>
-		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-		<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootsrap.min.js"></script>
-		<script type="text/javascript" src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
-		<script type="text/javascript" src="app/app.js"></script>
-	</head>
-	<body ng-controller="navigationController as navigation">
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-				  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-				    <span class="sr-only">Toggle navigation</span>
-				    <span class="icon-bar"></span>
-				    <span class="icon-bar"></span>
-				    <span class="icon-bar"></span>
-				  </button>
-				  <a class="navbar-brand" href="#">Cattle control</a>
-				</div>
-				<div id="navbar" class="collapse navbar-collapse">
-				  <ul class="nav navbar-nav">
-				    <li ng-class="{active:navigation.isSelected('cattle')}">
-				    	<a href ng-click="navigation.selectTab('cattle')">Gado</a>
-				    </li>
-				    <li ng-class="{active:navigation.isSelected('field')}">
-				    	<a href ng-click="navigation.selectTab('field')">Pasto</a>
-				    </li>
-				  </ul>
-				</div>
-			</div>
-		</nav>
-		<div id="main" class="container" role="main">
-			<div ng-controller="cattleController as cc" class="row" ng-show="cc.show(navigation.isSelected('cattle'))">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		    <span class="sr-only">Toggle navigation</span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="#">Cattle control</a>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+		  <ul class="nav navbar-nav">
+		    <li ng-class="{active:navigation.isSelected('cattle')}">
+		    	<a href ng-click="navigation.selectTab('cattle')">Gado</a>
+		    </li>
+		    <li ng-class="{active:navigation.isSelected('field')}">
+		    	<a href ng-click="navigation.selectTab('field')">Pasto</a>
+		    </li>
+		  </ul>
+		</div>
+	</div>
+</nav>
+<div id="main" class="container" role="main">
+			<div ng-controller="cattleController as cc" class="row" ng-show="navigation.isSelected('cattle')">
 				<h2>Inclusão de gado</h2>
 				<form name="cattle" ng-submit="cc.addCattle()" novalidate class="col-md-12" role="form">
+					<div class="form-group">
+					    <label class="col-sm-2" for="field">Pasto</label>
+					    <div class="col-sm-10">
+						    <select ng-model="cc.cattle.field" id="field"  class="form-control" required>
+								<option ng-repeat="field in cc.fields" value="{{field.name}}">{{field.name}}</option>								
+							</select>
+						</div>
+					</div>
 					<div class="form-group">
 					    <label class="col-sm-2" for="number">Número</label>
 					    <div class="col-sm-10">
 							<input type="number" id="number" ng-model="cc.cattle.number" class="form-control" required \>
 						</div>
 					</div>
-					<div class="form-group">
-					    <label class="col-sm-2" for="field">Pasto</label>
-					    <div class="col-sm-10">
-						    <select ng-model="cc.cattle.field" id="field"  class="form-control" required>
-								<option ng-repeat="field in cc.fields" value="{{field.name}}">{{field.name}}</option>
-							</select>
-						</div>
-					</div>					
 					<div class="form-group">
 					    <label class="col-sm-2" for="type">Tipo</label>
 					    <div class="col-sm-10">
@@ -134,7 +119,7 @@
 				<h2>Lista de pasto</h2>
 				<table class="col-md-12 table table-striped">
 					<tr>
-						<th>Pasto</th>
+						<th>Nome</th>
 					</tr>
 					<tr ng-repeat="field in fc.fields">
 						<td>{{field.name}}</td>
@@ -142,5 +127,3 @@
 				</table>
 			</div>
 		</div>
-	</body>
-</html>
