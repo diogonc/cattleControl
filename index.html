@@ -25,28 +25,27 @@
 				  <a class="navbar-brand" href="#">Cattle control</a>
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
-				  <ul class="nav navbar-nav">
-				    <li ng-class="{active:navigation.isSelected('cattle')}">
-				    	<a href ng-click="navigation.selectTab('cattle')">Gado</a>
-				    </li>
-				    <li ng-class="{active:navigation.isSelected('field')}">
-				    	<a href ng-click="navigation.selectTab('field')">Pasto</a>
-				    </li>
-				    <li ng-class="{active:navigation.isSelected('property')}">
-				    	<a href ng-click="navigation.selectTab('property')">Propriedade</a>
-				    </li>
-				  </ul>
-				  <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
-                            {{navigation.property.name}}
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-							<li ng-repeat="property in navigation.properties"><a href="">{{property.name}}</a></li>                            
-                        </ul>
-                    </li>
-                </ul>
+					<ul class="nav navbar-nav">
+						<li ng-class="{active:navigation.isSelected('cattle')}">
+							<a href ng-click="navigation.selectTab('cattle')">Gado</a>
+						</li>
+						<li ng-class="{active:navigation.isSelected('field')}">
+							<a href ng-click="navigation.selectTab('field')">Pasto</a>
+						</li>
+						<li ng-class="{active:navigation.isSelected('property')}">
+							<a href ng-click="navigation.selectTab('property')">Propriedade</a>
+						</li>
+					</ul>
+				  	<ul class="nav navbar-nav navbar-right">
+					  	<li class="btn-group" dropdown is-open="status.isopen">
+					      <a class="dropdown-toggle" ng-disabled="disabled">
+					        {{navigation.property.name}}<span class="caret"></span>
+					      </a>
+					      <ul class="dropdown-menu" role="menu">
+					      	<li ng-repeat="property in navigation.properties"><a href ng-click="navigation.setProperty(property)">{{property.name}}</a></li>
+					      </ul>
+					    </li>
+                	</ul>
 				</div>
 			</div>
 		</nav>

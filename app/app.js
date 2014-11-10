@@ -1,5 +1,5 @@
 (function(){
-	var app = angular.module('cattleControl',['LocalStorageModule']);
+	var app = angular.module('cattleControl',['LocalStorageModule', 'ui.bootstrap']);
 
 	app.config(function (localStorageServiceProvider) {
 	  localStorageServiceProvider
@@ -8,8 +8,8 @@
 
 	app.controller('navigationController', function($scope, localStorageService){
 		this.tab = 'cattle';
-		this.property = {name:'Cervinho'};
 		this.properties = localStorageService.get('properties');
+		this.property = this.properties[0];
 
 		this.selectTab = function(tab){
 			this.tab = tab;
@@ -18,6 +18,10 @@
 		this.isSelected = function(tab){
 			return this.tab === tab;
 		};
+
+		this.setProperty = function(property){
+			this.property = property;
+		}
 	});
 
 	app.controller('cattleController', function($scope, localStorageService){
