@@ -9,7 +9,7 @@
 	app.controller('navigationController', function($scope, localStorageService){
 		this.tab = 'cattle';
 		this.properties = localStorageService.get('properties');
-		this.property = this.properties[0];
+		this.property = this.properties != null ? this.properties[0] : {};
 
 		this.selectTab = function(tab){
 			this.tab = tab;
@@ -44,7 +44,7 @@
 		this.show = function(show){
 			if(show === true){
 				var fields = localStorageService.get('fields')
-				if(this.fields.length != fields.length)
+				if(fields != null && this.fields.length != fields.length)
 					this.fields = fields;
 			}				
 			return show;
@@ -73,11 +73,26 @@
 		if(this.properties == null)
 			this.properties = [];
 
-		this.addProperty = function(navigationProperties){
-			this.properties.push(this.property);
+		this.saveProperty = function(navigationProperties){
+			if(this.property.id == null){
+				this.property.id = this.properties.length;
+				this.properties.push(this.property);
+			}else{
+				this.properties.splice(this.property.id, 1, this.property);
+			}
+			
 			this.property = {};
 			localStorageService.set('properties',this.properties);
 			navigationProperties = this.properties;
 		};
+
+		this.edit = function(property){
+			this.property = property;
+		};
+
+		this.delete = function(property){
+			this.properties.splice(property.id,1);
+			localStorageService.set('properties',this.properties);
+		}
 	});
 })();

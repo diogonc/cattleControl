@@ -156,7 +156,7 @@
 			</div>
 			<div ng-controller="propertyController as pc" class="row" ng-show="navigation.isSelected('property')">
 				<h2>Inclusão de propriedade</h2>
-				<form name="field" ng-submit="pc.addProperty(navigation.properties)" novalidate class="col-md-12" role="form">
+				<form name="field" ng-submit="pc.saveProperty(navigation.properties)" novalidate class="col-md-12" role="form">
 					<div class="form-group">
 					    <label class="col-sm-2" for="name">Nome</label>
 					    <div class="col-sm-10">
@@ -174,9 +174,15 @@
 				<table class="col-md-12 table table-striped">
 					<tr>
 						<th>Propriedade</th>
+						<th></th>
 					</tr>
 					<tr ng-repeat="property in pc.properties">
 						<td>{{property.name}}</td>
+						<td>
+							<a href ng-click="pc.edit(property)">Editar</a>
+							|
+							<a href ng-click="pc.delete(property)">Excluir</a>
+						</td>						
 					</tr>
 				</table>
 			</div>
