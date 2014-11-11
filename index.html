@@ -52,7 +52,7 @@
 		<div id="main" class="container" role="main">
 			<div ng-controller="cattleController as cc" class="row" ng-show="cc.show(navigation.isSelected('cattle'))">
 				<h2>Inclusão de gado</h2>
-				<form name="cattle" ng-submit="cc.addCattle(navigation.property.name)" novalidate class="col-md-12" role="form">
+				<form name="cattle" ng-submit="cc.save(navigation.property)" novalidate class="col-md-12" role="form">
 					<div class="form-group">
 					    <label class="col-sm-2" for="number">Número</label>
 					    <div class="col-sm-10">
@@ -95,7 +95,6 @@
 					    <label class="col-sm-2" for="color">Cor</label>
 					    <div class="col-sm-10">
 							<select ng-model="cc.cattle.color" class="form-control" id="color">
-								<option>Selecione</option>
 								<option value="branco">branco</option>
 								<option value="preto">preto</option>
 							</select>
@@ -117,6 +116,7 @@
 						<th>Idade</th>
 						<th>Cor</th>
 						<th>Tem chifres</th>
+						<th></th>
 					</tr>
 					<tr ng-repeat="cattle in cc.cattles">
 						<td>{{cattle.field}}</td>
@@ -125,12 +125,16 @@
 						<td>{{cattle.age}}</td>
 						<td>{{cattle.color}}</td>
 						<td>{{cattle.hasHorns}}</td>
+						<td class="acoes">
+							<a href ng-click="cc.edit(cattle)">Editar</a>|
+							<a href ng-click="cc.delete(cattle)">Excluir</a>
+						</td>
 					</tr>
 				</table>
 			</div>
 			<div ng-controller="fieldController as fc" class="row" ng-show="navigation.isSelected('field')">
 				<h2>Inclusão de pasto</h2>
-				<form name="field" ng-submit="fc.addField(navigation.property.name)" novalidate class="col-md-12" role="form">
+				<form name="field" ng-submit="fc.save(navigation.property)" novalidate class="col-md-12" role="form">
 					<div class="form-group">
 					    <label class="col-sm-2" for="name">Nome</label>
 					    <div class="col-sm-10">
@@ -145,18 +149,23 @@
 				</form>
 				<div class="col-md-12">&nbsp;</div>
 				<h2>Lista de pasto</h2>
-				<table class="col-md-12 table table-striped">
+				<table class="col-md-12 table table-striped table-hover">
 					<tr>
 						<th>Pasto</th>
+						<th></th>
 					</tr>
 					<tr ng-repeat="field in fc.fields">
 						<td>{{field.name}}</td>
+						<td class="acoes">
+							<a href ng-click="fc.edit(field)">Editar</a>|
+							<a href ng-click="fc.delete(field)">Excluir</a>
+						</td>
 					</tr>
 				</table>
 			</div>
 			<div ng-controller="propertyController as pc" class="row" ng-show="navigation.isSelected('property')">
 				<h2>Inclusão de propriedade</h2>
-				<form name="field" ng-submit="pc.saveProperty(navigation.properties)" novalidate class="col-md-12" role="form">
+				<form name="field" ng-submit="pc.save(navigation.properties)" novalidate class="col-md-12" role="form">
 					<div class="form-group">
 					    <label class="col-sm-2" for="name">Nome</label>
 					    <div class="col-sm-10">
@@ -178,9 +187,8 @@
 					</tr>
 					<tr ng-repeat="property in pc.properties">
 						<td>{{property.name}}</td>
-						<td>
-							<a href ng-click="pc.edit(property)">Editar</a>
-							|
+						<td class="acoes">
+							<a href ng-click="pc.edit(property)">Editar</a>|
 							<a href ng-click="pc.delete(property)">Excluir</a>
 						</td>						
 					</tr>

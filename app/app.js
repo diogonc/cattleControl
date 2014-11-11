@@ -32,13 +32,28 @@
 		if(this.cattles == null)
 			this.cattles = [];
 
-		this.addCattle = function(property){
+		this.save = function(property){
 			this.cattle.property = property;
-			this.cattles.push(this.cattle);
+			var index = this.cattles.indexOf(this.cattle);
+			if(index < 0 ){
+				this.cattles.push(this.cattle);	
+			}else{
+				this.cattles.splice(index, 1, this.cattle);
+			}
+			
 			var oldCattle = this.cattle;
 			this.cattle = {field:oldCattle.field, type: oldCattle.type, hasHorns: oldCattle.hasHorns, age: oldCattle.age, color: oldCattle.color};
-
 			localStorageService.set('cattles',this.cattles);		
+		};
+
+		this.edit = function(cattle){
+			this.cattle = cattle;
+		};
+
+		this.delete = function(cattle){
+			var index = this.cattles.indexOf(cattle);
+			this.cattles.splice(index,1);
+			localStorageService.set('cattles',this.cattles);
 		};
 
 		this.show = function(show){
@@ -48,7 +63,7 @@
 					this.fields = fields;
 			}				
 			return show;
-		}
+		};
 	});
 
 	app.controller('fieldController', function($scope, localStorageService){
@@ -58,12 +73,27 @@
 		if(this.fields == null)
 			this.fields = [];
 
-		this.addField = function(property){
+		this.save = function(property){
 			this.field.property = property;
-			this.fields.push(this.field);
+			var index = this.fields.indexOf(this.field);
+			if(index < 0 ){
+				this.fields.push(this.field);	
+			}else{
+				this.fields.splice(index, 1, this.field);
+			}			
 			this.field = {};
 			localStorageService.set('fields',this.fields);
 		};
+		
+		this.edit = function(field){
+			this.field = field;
+		};
+
+		this.delete = function(field){
+			var index = this.fields.indexOf(field);
+			this.fields.splice(index,1);
+			localStorageService.set('fields',this.fields);
+		}
 	});
 
 	app.controller('propertyController', function($scope, localStorageService){
@@ -73,17 +103,18 @@
 		if(this.properties == null)
 			this.properties = [];
 
-		this.saveProperty = function(navigationProperties){
-			if(this.property.id == null){
-				this.property.id = this.properties.length;
+		this.save = function(navigationProperties){
+			var index = this.properties.indexOf(this.property);
+			if(index < 0 ){
 				this.properties.push(this.property);
 			}else{
-				this.properties.splice(this.property.id, 1, this.property);
+				this.properties.splice(index, 1, this.property);
 			}
 			
 			this.property = {};
 			localStorageService.set('properties',this.properties);
 			navigationProperties = this.properties;
+			location.reload();
 		};
 
 		this.edit = function(property){
@@ -91,8 +122,10 @@
 		};
 
 		this.delete = function(property){
-			this.properties.splice(property.id,1);
+			var index = this.fields.indexOf(property);
+			this.properties.splice(index, 1);
 			localStorageService.set('properties',this.properties);
+			location.reload();
 		}
 	});
 })();
