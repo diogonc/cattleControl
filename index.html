@@ -67,7 +67,8 @@
 					    <label class="col-sm-2" for="field">Pasto</label>
 					    <div class="col-sm-10">
 						    <select ng-model="cc.cattle.field" id="field"  class="form-control" required>
-								<option ng-repeat="field in cc.fields" value="{{field.name}}">{{field.name}}</option>
+								<option ng-repeat="field in cc.fields | filter:{ property:{name:navigation.property.name}}" 
+									value="{{field.name}}">{{field.name}}</option>
 							</select>
 						</div>
 					</div>					
@@ -123,7 +124,7 @@
 						<th>Tem chifres</th>
 						<th></th>
 					</tr>
-					<tr ng-repeat="cattle in cc.cattles">
+					<tr ng-repeat="cattle in cc.cattles | filter:{ property:{name:navigation.property.name} }">
 						<td>{{cattle.property.name}}</td>
 						<td>{{cattle.field}}</td>
 						<td>{{cattle.number}}</td>
@@ -161,7 +162,7 @@
 						<th>Pasto</th>
 						<th></th>
 					</tr>
-					<tr ng-repeat="field in fc.fields">
+					<tr ng-repeat="field in fc.fields | filter:{ property:{name:navigation.property.name} }">
 						<td>{{field.property.name}}</td>
 						<td>{{field.name}}</td>
 						<td class="acoes">
