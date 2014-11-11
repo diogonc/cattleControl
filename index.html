@@ -11,6 +11,10 @@
 		<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootsrap.min.js"></script>
 		<script type="text/javascript" src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
 		<script type="text/javascript" src="app/app.js"></script>
+		<script type="text/javascript" src="app/controllers/navigation-controller.js"></script>
+		<script type="text/javascript" src="app/controllers/property-controller.js"></script>
+		<script type="text/javascript" src="app/controllers/field-controller.js"></script>
+		<script type="text/javascript" src="app/controllers/cattle-controller.js"></script>
 	</head>
 	<body ng-controller="navigationController as navigation">
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -110,6 +114,7 @@
 				<h2>Lista de gado</h2>
 				<table class="col-md-12 table table-striped">
 					<tr>
+						<th>Propriedade</th>
 						<th>Pasto</th>
 						<th>Numero</th>
 						<th>Tipo</th>
@@ -119,6 +124,7 @@
 						<th></th>
 					</tr>
 					<tr ng-repeat="cattle in cc.cattles">
+						<td>{{cattle.property.name}}</td>
 						<td>{{cattle.field}}</td>
 						<td>{{cattle.number}}</td>
 						<td>{{cattle.type}}</td>
@@ -151,10 +157,12 @@
 				<h2>Lista de pasto</h2>
 				<table class="col-md-12 table table-striped table-hover">
 					<tr>
+						<th>Propriedade</th>
 						<th>Pasto</th>
 						<th></th>
 					</tr>
 					<tr ng-repeat="field in fc.fields">
+						<td>{{field.property.name}}</td>
 						<td>{{field.name}}</td>
 						<td class="acoes">
 							<a href ng-click="fc.edit(field)">Editar</a>|
