@@ -15,6 +15,8 @@
 		<script type="text/javascript" src="app/controllers/property-controller.js"></script>
 		<script type="text/javascript" src="app/controllers/field-controller.js"></script>
 		<script type="text/javascript" src="app/controllers/cattle-controller.js"></script>
+		<script type="text/javascript" src="app/controllers/type-controller.js"></script>
+		<script type="text/javascript" src="app/controllers/color-controller.js"></script>
 	</head>
 	<body ng-controller="navigationController as navigation">
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -39,6 +41,12 @@
 						<li ng-class="{active:navigation.isSelected('property')}">
 							<a href ng-click="navigation.selectTab('property')">Propriedade</a>
 						</li>
+						<li ng-class="{active:navigation.isSelected('type')}">
+							<a href ng-click="navigation.selectTab('type')">Tipo</a>
+						</li>
+						<li ng-class="{active:navigation.isSelected('color')}">
+							<a href ng-click="navigation.selectTab('color')">Cor</a>
+						</li>
 					</ul>
 				  	<ul class="nav navbar-nav navbar-right">
 					  	<li class="btn-group" dropdown is-open="status.isopen">
@@ -46,7 +54,9 @@
 					        {{navigation.property.name}}<span class="caret"></span>
 					      </a>
 					      <ul class="dropdown-menu" role="menu">
-					      	<li ng-repeat="property in navigation.properties"><a href ng-click="navigation.setProperty(property)">{{property.name}}</a></li>
+					      	<li ng-repeat="property in navigation.properties">
+					      		<a href ng-click="navigation.setProperty(property)">{{property.name}}</a>
+					      	</li>
 					      </ul>
 					    </li>
                 	</ul>
@@ -76,8 +86,7 @@
 					    <label class="col-sm-2" for="type">Tipo</label>
 					    <div class="col-sm-10">
 							<select ng-model="cc.cattle.type" id="type" class="form-control" required>
-								<option value="vaca">Vaca</option>
-								<option value="vaca">Boi</option>
+								<option ng-repeat="type in cc.types" value="{{type.name}}">{{type.name}}</option>
 							</select>
 						</div>
 					</div>
@@ -86,7 +95,7 @@
 					    <div class="col-sm-10">
 							<select ng-model="cc.cattle.hasHorns" id="hasHorns"  class="form-control" required>
 								<option value="sim">Sim</option>
-								<option value="nao">Nao</option>
+								<option value="não">Não</option>
 							</select>
 						</div>
 					</div>
@@ -100,8 +109,7 @@
 					    <label class="col-sm-2" for="color">Cor</label>
 					    <div class="col-sm-10">
 							<select ng-model="cc.cattle.color" class="form-control" id="color">
-								<option value="branco">branco</option>
-								<option value="preto">preto</option>
+								<option ng-repeat="color in cc.colors" value="{{color.name}}">{{color.name}}</option>
 							</select>
 						</div>
 					</div>
@@ -133,7 +141,7 @@
 						<td>{{cattle.color}}</td>
 						<td>{{cattle.hasHorns}}</td>
 						<td class="acoes">
-							<a href ng-click="cc.edit(cattle)">Editar</a>|
+							<a href ng-click="cc.edit(cattle)">Editar</a> | 
 							<a href ng-click="cc.delete(cattle)">Excluir</a>
 						</td>
 					</tr>
@@ -166,7 +174,7 @@
 						<td>{{field.property.name}}</td>
 						<td>{{field.name}}</td>
 						<td class="acoes">
-							<a href ng-click="fc.edit(field)">Editar</a>|
+							<a href ng-click="fc.edit(field)">Editar</a> | 
 							<a href ng-click="fc.delete(field)">Excluir</a>
 						</td>
 					</tr>
@@ -197,8 +205,70 @@
 					<tr ng-repeat="property in pc.properties">
 						<td>{{property.name}}</td>
 						<td class="acoes">
-							<a href ng-click="pc.edit(property)">Editar</a>|
+							<a href ng-click="pc.edit(property)">Editar</a> | 
 							<a href ng-click="pc.delete(property)">Excluir</a>
+						</td>						
+					</tr>
+				</table>
+			</div>
+			<div ng-controller="typeController as tc" class="row" ng-show="navigation.isSelected('type')">
+				<h2>Inclusão de tipo</h2>
+				<form name="field" ng-submit="tc.save()" novalidate class="col-md-12" role="form">
+					<div class="form-group">
+					    <label class="col-sm-2" for="name">Nome</label>
+					    <div class="col-sm-10">
+							<input type="text" id="name" ng-model="tc.type.name" class="form-control" required \>
+						</div>
+					</div>
+					<div class="form-group">
+					    <div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-default">Salvar</button>
+					    </div>
+					</div>
+				</form>
+				<div class="col-md-12">&nbsp;</div>
+				<h2>Lista de tipo</h2>
+				<table class="col-md-12 table table-striped">
+					<tr>
+						<th>Tipo</th>
+						<th></th>
+					</tr>
+					<tr ng-repeat="type in tc.types">
+						<td>{{type.name}}</td>
+						<td class="acoes">
+							<a href ng-click="tc.edit(type)">Editar</a> | 
+							<a href ng-click="tc.delete(type)">Excluir</a>
+						</td>						
+					</tr>
+				</table>
+			</div>
+			<div ng-controller="colorController as coc" class="row" ng-show="navigation.isSelected('color')">
+				<h2>Inclusão de cor</h2>
+				<form name="field" ng-submit="coc.save()" novalidate class="col-md-12" role="form">
+					<div class="form-group">
+					    <label class="col-sm-2" for="name">Nome</label>
+					    <div class="col-sm-10">
+							<input type="text" id="name" ng-model="coc.color.name" class="form-control" required \>
+						</div>
+					</div>
+					<div class="form-group">
+					    <div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-default">Salvar</button>
+					    </div>
+					</div>
+				</form>
+				<div class="col-md-12">&nbsp;</div>
+				<h2>Lista de cor</h2>
+				<table class="col-md-12 table table-striped">
+					<tr>
+						<th>Cor</th>
+						<th></th>
+					</tr>
+					<tr ng-repeat="color in coc.colors">
+						<td>{{color.name}}</td>
+						<td class="acoes">
+							<a href ng-click="coc.edit(color)">Editar</a> | 
+							<a href ng-click="coc.delete(color)">Excluir</a>
 						</td>						
 					</tr>
 				</table>

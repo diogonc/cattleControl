@@ -12,7 +12,7 @@ app.controller('propertyController', function($scope, localStorageService){
 		}else{
 			this.properties.splice(index, 1, this.property);
 		}
-		
+
 		this.property = {};
 		localStorageService.set('properties',this.properties);
 		navigationProperties = this.properties;
@@ -24,7 +24,7 @@ app.controller('propertyController', function($scope, localStorageService){
 	};
 
 	this.delete = function(property){
-		var index = this.fields.indexOf(property);
+		var index = this.properties.indexOf(property);
 		this.properties.splice(index, 1);
 		localStorageService.set('properties',this.properties);
 		location.reload();
