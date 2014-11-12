@@ -69,7 +69,7 @@
 			</div>
 		</nav>
 		<div id="main" class="container" role="main">
-			<h1>{{navigation.property.name}}</h1>
+			<h1 class="only-print">{{navigation.property.name}}</h1>
 			<div ng-controller="cattleController as cc" class="row" ng-show="cc.show(navigation.isSelected('cattle'))">
 				<h2 class="no-print">Inclusão de gado</h2>
 				<form class="no-print" name="cattle" ng-submit="cc.save(navigation.property)" novalidate class="col-md-12" role="form">
@@ -277,14 +277,15 @@
 			</div>
 			<div ng-controller="reportController as rc" class="row" ng-show="navigation.isSelected('report')">
 				<h2>Relatório</h2>
-				<table class="col-md-12 table table-striped">
-					<tr>
-						<th ng-repeat="type in rc.types">{{type.name}}</th>
-					</tr>
-					<tr ng-repeat="type in coc.colors">
-						<td ng-repeat="type in rc.types">{{type.name}}</td>
-					</tr>
-				</table>
+				<div ng-repeat="field in rc.report">
+					<h3>pasto: {{field.field}}</h3>
+					<table class="table table-striped">
+						<tr ng-repeat="type in field.types">
+							<td class="col-md-6">{{type.type}}</td>
+							<td class="col-md-6">{{type.qtd}}</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 	</body>

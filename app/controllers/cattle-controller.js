@@ -8,6 +8,9 @@ app.controller('cattleController', function($scope, localStorageService){
 	if(this.cattles == null)
 		this.cattles = [];
 
+	if(this.fields == null)
+		this.fields = [];
+
 	this.save = function(property){
 		this.cattle.property = property;
 		var index = this.cattles.indexOf(this.cattle);
