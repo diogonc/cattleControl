@@ -1,0 +1,7 @@
+.acoes, .no-print{
+	display: none;
+}
+
+.for-print{
+	display: block;
+}

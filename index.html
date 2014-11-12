@@ -7,6 +7,7 @@
 	    <title>Cattle control</title>
 		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/print.css" media="print">
 		<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
 		<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootsrap.min.js"></script>
 		<script type="text/javascript" src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
@@ -17,6 +18,7 @@
 		<script type="text/javascript" src="app/controllers/cattle-controller.js"></script>
 		<script type="text/javascript" src="app/controllers/type-controller.js"></script>
 		<script type="text/javascript" src="app/controllers/color-controller.js"></script>
+		<script type="text/javascript" src="app/controllers/report-controller.js"></script>
 	</head>
 	<body ng-controller="navigationController as navigation">
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -47,10 +49,13 @@
 						<li ng-class="{active:navigation.isSelected('color')}">
 							<a href ng-click="navigation.selectTab('color')">Cor</a>
 						</li>
+						<li ng-class="{active:navigation.isSelected('report')}">
+							<a href ng-click="navigation.selectTab('report')">Relatório</a>
+						</li>
 					</ul>
 				  	<ul class="nav navbar-nav navbar-right">
 					  	<li class="btn-group" dropdown is-open="status.isopen">
-					      <a class="dropdown-toggle" ng-disabled="disabled">
+					      <a class="dropdown-toggle for-print" ng-disabled="disabled">
 					        {{navigation.property.name}}<span class="caret"></span>
 					      </a>
 					      <ul class="dropdown-menu" role="menu">
@@ -64,9 +69,10 @@
 			</div>
 		</nav>
 		<div id="main" class="container" role="main">
+			<h1>{{navigation.property.name}}</h1>
 			<div ng-controller="cattleController as cc" class="row" ng-show="cc.show(navigation.isSelected('cattle'))">
-				<h2>Inclusão de gado</h2>
-				<form name="cattle" ng-submit="cc.save(navigation.property)" novalidate class="col-md-12" role="form">
+				<h2 class="no-print">Inclusão de gado</h2>
+				<form class="no-print" name="cattle" ng-submit="cc.save(navigation.property)" novalidate class="col-md-12" role="form">
 					<div class="form-group">
 					    <label class="col-sm-2" for="number">Número</label>
 					    <div class="col-sm-10">
@@ -123,17 +129,15 @@
 				<h2>Lista de gado</h2>
 				<table class="col-md-12 table table-striped">
 					<tr>
-						<th>Propriedade</th>
 						<th>Pasto</th>
 						<th>Numero</th>
 						<th>Tipo</th>
 						<th>Idade</th>
 						<th>Cor</th>
 						<th>Tem chifres</th>
-						<th></th>
+						<th class="acoes"></th>
 					</tr>
-					<tr ng-repeat="cattle in cc.cattles | filter:{ property:{name:navigation.property.name} }">
-						<td>{{cattle.property.name}}</td>
+					<tr ng-repeat="cattle in cc.cattles | filter:{ property:{name:navigation.property.name}} | orderBy:field">
 						<td>{{cattle.field}}</td>
 						<td>{{cattle.number}}</td>
 						<td>{{cattle.type}}</td>
@@ -166,12 +170,10 @@
 				<h2>Lista de pasto</h2>
 				<table class="col-md-12 table table-striped table-hover">
 					<tr>
-						<th>Propriedade</th>
 						<th>Pasto</th>
 						<th></th>
 					</tr>
 					<tr ng-repeat="field in fc.fields | filter:{ property:{name:navigation.property.name} }">
-						<td>{{field.property.name}}</td>
 						<td>{{field.name}}</td>
 						<td class="acoes">
 							<a href ng-click="fc.edit(field)">Editar</a> | 
@@ -270,6 +272,17 @@
 							<a href ng-click="coc.edit(color)">Editar</a> | 
 							<a href ng-click="coc.delete(color)">Excluir</a>
 						</td>						
+					</tr>
+				</table>
+			</div>
+			<div ng-controller="reportController as rc" class="row" ng-show="navigation.isSelected('report')">
+				<h2>Relatório</h2>
+				<table class="col-md-12 table table-striped">
+					<tr>
+						<th ng-repeat="type in rc.types">{{type.name}}</th>
+					</tr>
+					<tr ng-repeat="type in coc.colors">
+						<td ng-repeat="type in rc.types">{{type.name}}</td>
 					</tr>
 				</table>
 			</div>

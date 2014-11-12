@@ -10,9 +10,10 @@
 }
 
 h1{
-	font-size: 25px;
+	margin-left: 0;
 }
 
 .acoes{
 	text-align: right;
 }
+
