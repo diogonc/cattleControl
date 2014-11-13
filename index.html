@@ -323,10 +323,10 @@
 			<div ng-controller="reportController as rc" class="row" ng-show="navigation.isSelected('report')">
 				<h2>Relatório</h2>
 				<div ng-repeat="field in rc.report">
-					<h3>pasto: {{field.field}}</h3>
+					<h3>pasto: {{field.field.name}}</h3>
 					<table class="table table-striped">
 						<tr ng-repeat="type in field.types">
-							<td class="col-md-6">{{type.type}}</td>
+							<td class="col-md-6">{{type.type.name}}</td>
 							<td class="col-md-6">{{type.qtd}}</td>
 						</tr>
 					</table>
