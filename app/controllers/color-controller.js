@@ -1,4 +1,4 @@
-app.controller('colorController', function($scope, localStorageService){
+app.controller('colorController', function($scope, localStorageService, rfc4122){
 	this.color = {};
 	this.colors = localStorageService.get('colors');
 
@@ -8,6 +8,7 @@ app.controller('colorController', function($scope, localStorageService){
 	this.save = function(){
 		var index = this.colors.indexOf(this.color);
 		if(index < 0 ){
+			this.color.uuid = rfc4122.newuuid();
 			this.colors.push(this.color);
 		}else{
 			this.colors.splice(index, 1, this.color);

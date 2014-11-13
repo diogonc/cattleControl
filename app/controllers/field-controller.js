@@ -1,4 +1,4 @@
-app.controller('fieldController', function($scope, localStorageService){
+app.controller('fieldController', function($scope, localStorageService, rfc4122){
 	this.field = {};
 	this.fields = localStorageService.get('fields');
 
@@ -9,6 +9,7 @@ app.controller('fieldController', function($scope, localStorageService){
 		this.field.property = property;
 		var index = this.fields.indexOf(this.field);
 		if(index < 0 ){
+			this.field.uuid = rfc4122.newuuid();
 			this.fields.push(this.field);	
 		}else{
 			this.fields.splice(index, 1, this.field);

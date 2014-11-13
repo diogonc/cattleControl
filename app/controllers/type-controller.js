@@ -1,4 +1,4 @@
-app.controller('typeController', function($scope, localStorageService){
+app.controller('typeController', function($scope, localStorageService, rfc4122){
 	this.type = {};
 	this.types = localStorageService.get('types');
 
@@ -8,6 +8,7 @@ app.controller('typeController', function($scope, localStorageService){
 	this.save = function(){
 		var index = this.types.indexOf(this.type);
 		if(index < 0 ){
+			this.type.uuid = rfc4122.newuuid();
 			this.types.push(this.type);
 		}else{
 			this.types.splice(index, 1, this.type);

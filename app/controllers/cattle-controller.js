@@ -1,4 +1,4 @@
-app.controller('cattleController', function($scope, localStorageService){
+app.controller('cattleController', function($scope, localStorageService, rfc4122){
 	this.cattle = {};
 	this.cattles = localStorageService.get('cattles');
 	this.fields = localStorageService.get('fields');
@@ -15,6 +15,7 @@ app.controller('cattleController', function($scope, localStorageService){
 		this.cattle.property = property;
 		var index = this.cattles.indexOf(this.cattle);
 		if(index < 0 ){
+			this.cattle.uuid = rfc4122.newuuid();
 			this.cattles.push(this.cattle);	
 		}else{
 			this.cattles.splice(index, 1, this.cattle);

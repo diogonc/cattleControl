@@ -1,4 +1,4 @@
-app.controller('propertyController', function($scope, localStorageService){
+app.controller('propertyController', function($scope, localStorageService, rfc4122){
 	this.property = {};
 	this.properties = localStorageService.get('properties');
 
@@ -8,6 +8,7 @@ app.controller('propertyController', function($scope, localStorageService){
 	this.save = function(navigationProperties){
 		var index = this.properties.indexOf(this.property);
 		if(index < 0 ){
+			this.property.uuid = rfc4122.newuuid();
 			this.properties.push(this.property);
 		}else{
 			this.properties.splice(index, 1, this.property);
