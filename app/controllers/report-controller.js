@@ -32,10 +32,14 @@ app.controller('reportController', function($scope, localStorageService, filterF
 		return typesForField;
 	};
 
-	var cattlesPerTypeAndField = function(type, field, cattlesPerTypeAndField){
-		return 3;
+	var cattlesPerTypeAndField = function(type, field, array){
+		var counter = 0;
+		for(var i=0; i<array.length; i++) {
+			if (array[i].type === type.name && array[i].field === field.name) 
+				counter++;
+		}
+		return counter;
 	};
 
-	this.report = report(this.fields, this.types, this.cattles);
-	//console.log(report(this.fields, this.types, this.cattles));
+	this.report = report(this.fields, this.types, this.cattles);	
 });
