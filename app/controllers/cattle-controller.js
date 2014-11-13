@@ -3,6 +3,7 @@ app.controller('cattleController', function($scope, localStorageService, rfc4122
 	this.cattles = localStorageService.get('cattles');
 	this.fields = localStorageService.get('fields');
 	this.types = localStorageService.get('types');
+	this.races = localStorageService.get('races');
 	this.colors = localStorageService.get('colors');
 
 	if(this.cattles == null)
