@@ -1,4 +1,4 @@
-app.controller('colorController', function($scope, localStorageService, rfc4122){
+app.controller('colorController', function($scope, localStorageService, rfc4122, DataTransfer){
 	this.color = {};
 	this.colors = localStorageService.get('colors');
 
@@ -16,6 +16,7 @@ app.controller('colorController', function($scope, localStorageService, rfc4122)
 		
 		this.color = {};
 		localStorageService.set('colors',this.colors);
+		DataTransfer.updateColors(this.colors);
 	};
 
 	this.edit = function(color){
@@ -26,5 +27,6 @@ app.controller('colorController', function($scope, localStorageService, rfc4122)
 		var index = this.colors.indexOf(color);
 		this.colors.splice(index, 1);
 		localStorageService.set('colors',this.colors);
+		DataTransfer.updateColors(this.colors);
 	}
 });

@@ -1,4 +1,4 @@
-app.controller('propertyController', function($scope, localStorageService, rfc4122){
+app.controller('propertyController', function($scope, localStorageService, rfc4122, DataTransfer){
 	this.property = {};
 	this.properties = localStorageService.get('properties');
 
@@ -17,7 +17,7 @@ app.controller('propertyController', function($scope, localStorageService, rfc41
 		this.property = {};
 		localStorageService.set('properties',this.properties);
 		navigationProperties = this.properties;
-		$scope.$emit('update_properties', this.properties);
+		DataTransfer.updateProperties(this.properties);
 	};
 
 	this.edit = function(property){
@@ -28,6 +28,6 @@ app.controller('propertyController', function($scope, localStorageService, rfc41
 		var index = this.properties.indexOf(property);
 		this.properties.splice(index, 1);
 		localStorageService.set('properties',this.properties);
-		$scope.$emit('update_properties', this.properties);
+		DataTransfer.updateProperties(this.properties);	
 	}
 });

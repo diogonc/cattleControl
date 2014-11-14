@@ -48,5 +48,7 @@ app.controller('cattleController', function($scope, localStorageService, rfc4122
 
 	$scope.$on('valuesUpdated', function() {
 	    $scope.fields = DataTransfer.fields;
+	    $scope.properties = DataTransfer.properties;
+	    $scope.colors = DataTransfer.colors;
 	});
 });
