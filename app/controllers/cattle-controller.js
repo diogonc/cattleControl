@@ -1,4 +1,4 @@
-app.controller('cattleController', function($scope, localStorageService, rfc4122){
+app.controller('cattleController', function($scope, localStorageService, rfc4122, DataTransfer){
 	this.cattle = {};
 	this.cattles = localStorageService.get('cattles');
 	this.fields = localStorageService.get('fields');
@@ -45,4 +45,8 @@ app.controller('cattleController', function($scope, localStorageService, rfc4122
 		}				
 		return show;
 	};
+
+	$scope.$on('valuesUpdated', function() {
+	    $scope.fields = DataTransfer.fields;
+	});
 });

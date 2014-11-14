@@ -1,10 +1,3 @@
-var app = angular.module('cattleControl',['LocalStorageModule', 'ui.bootstrap', 'uuids']);
-
-app.config(function (localStorageServiceProvider) {
-  localStorageServiceProvider
-    .setPrefix('cattleControl');
-});
-
 var uuids = angular.module('uuids', []);
 	uuids.factory("rfc4122", function () {
     return {
@@ -21,4 +14,22 @@ var uuids = angular.module('uuids', []);
             return s.join("");
         }
     }
+});
+
+angular.module('dataTransfer', []).factory('DataTransfer', function($rootScope){
+    var service = {};
+    service.fields = [];    
+
+    service.updateFields = function(value){
+        this.fields = value;
+        $rootScope.$broadcast("valuesUpdated");
+    }
+
+    return service;
+});
+
+var app = angular.module('cattleControl',['LocalStorageModule', 'ui.bootstrap', 'uuids', 'dataTransfer']);
+
+app.config(function (localStorageServiceProvider) {
+  localStorageServiceProvider.setPrefix('cattleControl');
 });
