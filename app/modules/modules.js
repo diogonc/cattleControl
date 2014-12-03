@@ -1,5 +1,4 @@
-var uuids = angular.module('uuids', []);
-	uuids.factory("rfc4122", function () {
+app.factory("rfc4122", function () {
     return {
         newuuid: function () {
             // http://www.ietf.org/rfc/rfc4122.txt
@@ -16,26 +15,14 @@ var uuids = angular.module('uuids', []);
     }
 });
 
-var dataTransfer = angular.module('dataTransfer', []).factory('DataTransfer', function($rootScope){
+app.factory('DataTransfer', function($rootScope){
     var service = {};
-    service.fields = [];    
-    service.properties = [];
-    service.colors = [];
+    service.fields = [];
 
     service.updateFields = function(value){
-        this.fields = value;
+        service.fields = value;
         $rootScope.$broadcast("valuesUpdated");
-    }
-
-    service.updateProperties = function(value){
-        this.properties = value;
-        $rootScope.$broadcast("valuesUpdated");
-    }
-
-    service.updateColors = function(value){
-        this.colors = value;
-        $rootScope.$broadcast("valuesUpdated");
-    }
+    };
 
     return service;
 });

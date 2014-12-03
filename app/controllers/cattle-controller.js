@@ -1,10 +1,10 @@
-app.controller('cattleController', function($scope, localStorageService, rfc4122, DataTransfer){
+app.controller('cattleController', function($scope, localStorageService, rfc4122, DataTransfer, colorRepository){
 	this.cattle = {};
 	this.cattles = localStorageService.get('cattles');
 	this.fields = localStorageService.get('fields');
 	this.types = localStorageService.get('types');
 	this.races = localStorageService.get('races');
-	this.colors = localStorageService.get('colors');
+	this.colors = colorRepository.colors;
 
 	if(this.cattles == null)
 		this.cattles = [];
@@ -17,14 +17,14 @@ app.controller('cattleController', function($scope, localStorageService, rfc4122
 		var index = this.cattles.indexOf(this.cattle);
 		if(index < 0 ){
 			this.cattle.uuid = rfc4122.newuuid();
-			this.cattles.push(this.cattle);	
+			this.cattles.push(this.cattle);
 		}else{
 			this.cattles.splice(index, 1, this.cattle);
 		}
-		
+
 		var oldCattle = this.cattle;
 		this.cattle = {field:oldCattle.field};
-		localStorageService.set('cattles',this.cattles);		
+		localStorageService.set('cattles',this.cattles);
 	};
 
 	this.edit = function(cattle){
@@ -42,13 +42,11 @@ app.controller('cattleController', function($scope, localStorageService, rfc4122
 			var fields = localStorageService.get('fields')
 			if(fields != null && this.fields.length != fields.length)
 				this.fields = fields;
-		}				
+		}
 		return show;
 	};
 
 	$scope.$on('valuesUpdated', function() {
-	    $scope.fields = DataTransfer.fields;
-	    $scope.properties = DataTransfer.properties;
-	    $scope.colors = DataTransfer.colors;
+	    this.fields = DataTransfer.fields;
 	});
 });

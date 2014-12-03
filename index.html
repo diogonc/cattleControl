@@ -11,8 +11,8 @@
 		<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
 		<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootsrap.min.js"></script>
 		<script type="text/javascript" src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
-		<script type="text/javascript" src="app/modules/modules.js"></script>
 		<script type="text/javascript" src="app/app.js"></script>
+		<script type="text/javascript" src="app/modules/modules.js"></script>
 		<script type="text/javascript" src="app/controllers/navigation-controller.js"></script>
 		<script type="text/javascript" src="app/controllers/property-controller.js"></script>
 		<script type="text/javascript" src="app/controllers/field-controller.js"></script>
@@ -88,11 +88,11 @@
 					    <label class="col-sm-2" for="field">Pasto</label>
 					    <div class="col-sm-10">
 						    <select ng-model="cc.cattle.field" id="field"  class="form-control" required>
-								<option ng-repeat="field in cc.fields | filter:{ property:{uuid:navigation.property.uuid}}" 
+								<option ng-repeat="field in cc.fields | filter:{ property:{uuid:navigation.property.uuid}}"
 									value="{{field.name}}">{{field.name}}</option>
 							</select>
 						</div>
-					</div>					
+					</div>
 					<div class="form-group">
 					    <label class="col-sm-2" for="type">Tipo</label>
 					    <div class="col-sm-10">
@@ -160,7 +160,7 @@
 						<td>{{cattle.color}}</td>
 						<td>{{cattle.hasHorns}}</td>
 						<td class="acoes">
-							<a href ng-click="cc.edit(cattle)">Editar</a> | 
+							<a href ng-click="cc.edit(cattle)">Editar</a> |
 							<a href ng-click="cc.delete(cattle)">Excluir</a>
 						</td>
 					</tr>
@@ -191,7 +191,7 @@
 					<tr ng-repeat="field in fc.fields | filter:{ property:{uuid:navigation.property.uuid} }">
 						<td>{{field.name}}</td>
 						<td class="acoes">
-							<a href ng-click="fc.edit(field)">Editar</a> | 
+							<a href ng-click="fc.edit(field)">Editar</a> |
 							<a href ng-click="fc.delete(field)">Excluir</a>
 						</td>
 					</tr>
@@ -222,9 +222,9 @@
 					<tr ng-repeat="property in pc.properties">
 						<td>{{property.name}}</td>
 						<td class="acoes">
-							<a href ng-click="pc.edit(property)">Editar</a> | 
+							<a href ng-click="pc.edit(property)">Editar</a> |
 							<a href ng-click="pc.delete(property)">Excluir</a>
-						</td>						
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -253,9 +253,9 @@
 					<tr ng-repeat="type in tc.types">
 						<td>{{type.name}}</td>
 						<td class="acoes">
-							<a href ng-click="tc.edit(type)">Editar</a> | 
+							<a href ng-click="tc.edit(type)">Editar</a> |
 							<a href ng-click="tc.delete(type)">Excluir</a>
-						</td>						
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -284,9 +284,9 @@
 					<tr ng-repeat="race in rac.races">
 						<td>{{race.name}}</td>
 						<td class="acoes">
-							<a href ng-click="rac.edit(type)">Editar</a> | 
+							<a href ng-click="rac.edit(type)">Editar</a> |
 							<a href ng-click="rac.delete(type)">Excluir</a>
-						</td>						
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -315,9 +315,9 @@
 					<tr ng-repeat="color in coc.colors">
 						<td>{{color.name}}</td>
 						<td class="acoes">
-							<a href ng-click="coc.edit(color)">Editar</a> | 
+							<a href ng-click="coc.edit(color)">Editar</a> |
 							<a href ng-click="coc.delete(color)">Excluir</a>
-						</td>						
+						</td>
 					</tr>
 				</table>
 			</div>
