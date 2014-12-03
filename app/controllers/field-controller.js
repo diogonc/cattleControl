@@ -1,4 +1,4 @@
-app.controller('fieldController', function($scope, localStorageService, rfc4122, DataTransfer){
+app.controller('fieldController', function($scope, localStorageService){
 	this.field = {};
 	this.fields = localStorageService.get('fields');
 
@@ -10,15 +10,14 @@ app.controller('fieldController', function($scope, localStorageService, rfc4122,
 		var index = this.fields.indexOf(this.field);
 		if(index < 0 ){
 			this.field.uuid = rfc4122.newuuid();
-			this.fields.push(this.field);	
+			this.fields.push(this.field);
 		}else{
 			this.fields.splice(index, 1, this.field);
-		}			
+		}
 		this.field = {};
 		localStorageService.set('fields',this.fields);
-		DataTransfer.updateFields(this.fields);
 	};
-	
+
 	this.edit = function(field){
 		this.field = field;
 	};
@@ -27,6 +26,5 @@ app.controller('fieldController', function($scope, localStorageService, rfc4122,
 		var index = this.fields.indexOf(field);
 		this.fields.splice(index,1);
 		localStorageService.set('fields',this.fields);
-		DataTransfer.updateFields(this.fields);
 	}
 });

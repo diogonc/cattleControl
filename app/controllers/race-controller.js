@@ -1,4 +1,4 @@
-app.controller('raceController', function($scope, localStorageService, rfc4122){
+app.controller('raceController', function($scope, localStorageService){
 	this.race = {};
 	this.races = localStorageService.get('races');
 
@@ -13,7 +13,7 @@ app.controller('raceController', function($scope, localStorageService, rfc4122){
 		}else{
 			this.races.splice(index, 1, this.race);
 		}
-		
+
 		this.race = {};
 		localStorageService.set('races',this.races);
 	};

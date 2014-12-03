@@ -1,4 +1,4 @@
-app.controller('typeController', function($scope, localStorageService, rfc4122){
+app.controller('typeController', function($scope, localStorageService){
 	this.type = {};
 	this.types = localStorageService.get('types');
 
@@ -13,7 +13,7 @@ app.controller('typeController', function($scope, localStorageService, rfc4122){
 		}else{
 			this.types.splice(index, 1, this.type);
 		}
-		
+
 		this.type = {};
 		localStorageService.set('types',this.types);
 	};

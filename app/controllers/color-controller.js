@@ -1,4 +1,4 @@
-app.controller('colorController', function($scope, localStorageService, rfc4122, colorRepository){
+app.controller('colorController', function(colorRepository){
 	this.color = {};
 	this.colors = colorRepository.colors;
 
