@@ -13,13 +13,16 @@
 		<script type="text/javascript" src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
 		<script type="text/javascript" src="app/app.js"></script>
 		<script type="text/javascript" src="app/modules/modules.js"></script>
+		<script type="text/javascript" src="app/color/color-service.js"></script>
+		<script type="text/javascript" src="app/color/color-controller.js"></script>
+		<script type="text/javascript" src="app/cattle/cattle-service.js"></script>
+		<script type="text/javascript" src="app/cattle/cattle-controller.js"></script>
+		<script type="text/javascript" src="app/race/race-service.js"></script>
+		<script type="text/javascript" src="app/race/race-controller.js"></script>
 		<script type="text/javascript" src="app/controllers/navigation-controller.js"></script>
 		<script type="text/javascript" src="app/controllers/property-controller.js"></script>
-		<script type="text/javascript" src="app/controllers/field-controller.js"></script>
-		<script type="text/javascript" src="app/controllers/cattle-controller.js"></script>
-		<script type="text/javascript" src="app/controllers/type-controller.js"></script>
-		<script type="text/javascript" src="app/controllers/race-controller.js"></script>
-		<script type="text/javascript" src="app/controllers/color-controller.js"></script>
+		<script type="text/javascript" src="app/controllers/field-controller.js"></script>		
+		<script type="text/javascript" src="app/controllers/type-controller.js"></script>		
 		<script type="text/javascript" src="app/controllers/report-controller.js"></script>
 	</head>
 	<body ng-controller="navigationController as navigation">
@@ -75,7 +78,7 @@
 		</nav>
 		<div id="main" class="container" role="main">
 			<h1>{{navigation.property.name}}</h1>
-			<div ng-controller="cattleController as cc" class="row" ng-show="cc.show(navigation.isSelected('cattle'))">
+			<div ng-controller="cattleController as cc" class="row" ng-show="navigation.isSelected('cattle')">
 				<h2 class="no-print">Inclusão de gado</h2>
 				<form class="no-print" name="cattle" ng-submit="cc.save(navigation.property)" novalidate class="col-md-12" role="form">
 					<div class="form-group">

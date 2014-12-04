@@ -13,34 +13,3 @@ app.factory('guidGenerator', function () {
         }
     }
 });
-
-app.factory('colorRepository', ['guidGenerator', 'localStorageService', function(guidGenerator, localStorageService){
-   colorRepository = {
-    colors: [],
-
-    save: function(color){
-      var index = colorRepository.colors.indexOf(color);
-      if(index < 0 ){
-        color.uuid = guidGenerator.generate();
-        colorRepository.colors.push(color);
-      }else{
-        colorRepository.colors.splice(index, 1, color);
-      }
-
-      localStorageService.set('colors',colorRepository.colors);
-    },
-
-    delete: function(color){
-      var index = colorRepository.colors.indexOf(color);
-      colorRepository.colors.splice(index, 1);
-
-      localStorageService.set('colors',colorRepository.colors);
-    }
-  };
-
-  colorRepository.colors = localStorageService.get('colors');
-  if(colorRepository.colors == null)
-    colorRepository.colors = [];
-
-  return colorRepository;
-}])
