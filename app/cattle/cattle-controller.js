@@ -1,20 +1,18 @@
-app.controller('cattleController', ['cattleService', 'repositoryService', function(cattleService, repository){
-	repository.init('races');
-	repository.init('colors');
-
+app.controller('cattleController', ['cattleRepository', 'raceRepository', 'colorRepository', 'typeRepository', 'fieldRepository',
+ function(cattleRepository, raceRepository, colorRepository, typeRepository, fieldRepository){
 	this.cattle = {};
-	this.cattles = cattleService.list;
-	// this.fields = localStorageService.get('fields');
-	// this.types = localStorageService.get('types');
-	this.races = repository.getAll('races');
-	this.colors = repository.getAll('colors');
+	this.cattles = cattleRepository.list;
+	this.fields = fieldRepository.list;
+	this.types = typeRepository.list;
+	this.races = raceRepository.list;
+	this.colors = colorRepository.list;
 
 	if(this.fields == null)
 		this.fields = [];
 
 	this.save = function(property){
 		this.cattle.property = property;
-		cattleService.save(this.cattle);
+		cattleRepository.save(this.cattle);
 	};
 
 	this.edit = function(cattle){
@@ -22,6 +20,6 @@ app.controller('cattleController', ['cattleService', 'repositoryService', functi
 	};
 
 	this.delete = function(cattle){
-		cattleService.delete(cattle);
+		cattleRepository.delete(cattle);
 	};
 }]);

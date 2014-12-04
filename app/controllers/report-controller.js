@@ -1,8 +1,8 @@
-app.controller('reportController', function($scope, localStorageService, filterFilter){
-	this.cattles = localStorageService.get('cattles');
-	this.fields = localStorageService.get('fields');
-	this.types = localStorageService.get('types');
-	
+app.controller('reportController', ['cattleRepository', 'fieldRepository', 'typeRepository', function(cattleRepository, fieldRepository, typeRepository){
+	this.cattles = cattleRepository.list;
+	this.fields = fieldRepository.list;
+	this.types = typeRepository.list;
+
 	if(this.cattles == null)
 		this.cattles = [];
 
@@ -18,7 +18,7 @@ app.controller('reportController', function($scope, localStorageService, filterF
 			report.push({field:field, types: typesForField(field, types, cattles)});
 		});
 		return report;
-	};	
+	};
 
 	var typesForField = function(field, types, cattles){
 		var typesForField = [];
@@ -31,11 +31,11 @@ app.controller('reportController', function($scope, localStorageService, filterF
 	var cattlesPerTypeAndField = function(type, field, array){
 		var counter = 0;
 		for(var i=0; i<array.length; i++) {
-			if (array[i].type === type.name && array[i].field === field.name) 
+			if (array[i].type === type.name && array[i].field === field.name)
 				counter++;
 		}
 		return counter;
 	};
 
-	this.report = report(this.fields, this.types, this.cattles);	
-});
+	this.report = report(this.fields, this.types, this.cattles);
+}]);

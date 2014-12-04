@@ -1,6 +1,6 @@
-app.controller('navigationController', function($scope, localStorageService){
+app.controller('navigationController', ['propertyRepository', function(propertyRepository){
 	this.tab = 'cattle';
-	this.properties = localStorageService.get('properties');
+	this.properties = propertyRepository.list;
 	this.property = this.properties != null ? this.properties[0] : {};
 	this.navbarCollapsed = true;
 
@@ -15,4 +15,4 @@ app.controller('navigationController', function($scope, localStorageService){
 	this.setProperty = function(property){
 		this.property = property;
 	}
-});
+}]);

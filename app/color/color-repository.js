@@ -1,4 +1,4 @@
-app.factory('colorService', ['guidGenerator', 'localStorageService', function(guidGenerator, localStorageService){
+app.factory('colorRepository', ['guidGenerator', 'localStorageService', function(guidGenerator, localStorageService){
   var service = {
     list: [],
 

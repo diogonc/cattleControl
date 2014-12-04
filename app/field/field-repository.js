@@ -1,5 +1,5 @@
-app.factory('cattleService', ['guidGenerator', 'localStorageService', function(guidGenerator, localStorageService){
-  service = {
+app.factory('fieldRepository', ['guidGenerator', 'localStorageService', function(guidGenerator, localStorageService){
+  var service = {
     list: [],
 
     save: function(item){
@@ -11,18 +11,18 @@ app.factory('cattleService', ['guidGenerator', 'localStorageService', function(g
         service.list.splice(index, 1, item);
       }
 
-      localStorageService.set('cattles', service.list);
+      localStorageService.set('fields', service.list);
     },
 
     delete: function(item){
       var index = service.list.indexOf(item);
       service.list.splice(index, 1);
 
-      localStorageService.set('cattles', service.list);
+      localStorageService.set('fields', service.list);
     }
   };
 
-  service.list = localStorageService.get('cattles');
+  service.list = localStorageService.get('fields');
   if(service.list == null)
     service.list = [];
 

@@ -1,20 +1,17 @@
-app.controller('colorController', ['repositoryService', function(repository){
-	repository.init('colors');
-
+app.controller('colorController', ['colorRepository', function(repository){
 	this.color = {};
-	this.colors = repository.getAll('colors');
+	this.colors = repository.list;
 
 	this.save = function(){
-		repository.save('colors', this.color);
+		repository.save(this.color);
 		this.color = {};
 	};
 
 	this.edit = function(color){
 		this.color = color;
-
 	};
 
 	this.delete = function(color){
-		repository.delete('colors', color);
+		repository.delete(color);
 	}
 }]);
