@@ -1,9 +1,11 @@
-app.controller('raceController', function(raceService){
+app.controller('raceController', ['repositoryService', function(repository){
+	repository.init('races');
+
 	this.race = {};
-	this.races = raceService.list;
+	this.races = repository.getAll('races');
 
 	this.save = function(){
-		raceService.save(this.race);
+		repository.save('races', this.race);
 		this.race = {};
 	};
 
@@ -12,6 +14,6 @@ app.controller('raceController', function(raceService){
 	};
 
 	this.delete = function(race){
-		raceService.delete(race);
+		repository.delete('races', race);
 	}
-});
+}]);

@@ -1,10 +1,13 @@
-app.controller('cattleController', function(cattleService, raceService, colorService){
+app.controller('cattleController', ['cattleService', 'repositoryService', function(cattleService, repository){
+	repository.init('races');
+	repository.init('colors');
+
 	this.cattle = {};
 	this.cattles = cattleService.list;
 	// this.fields = localStorageService.get('fields');
 	// this.types = localStorageService.get('types');
-	this.races = raceService.list;
-	this.colors = colorService.list;
+	this.races = repository.getAll('races');
+	this.colors = repository.getAll('colors');
 
 	if(this.fields == null)
 		this.fields = [];
@@ -21,4 +24,4 @@ app.controller('cattleController', function(cattleService, raceService, colorSer
 	this.delete = function(cattle){
 		cattleService.delete(cattle);
 	};
-});
+}]);

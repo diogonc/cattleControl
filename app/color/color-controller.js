@@ -1,9 +1,11 @@
-app.controller('colorController', function(colorService){
+app.controller('colorController', ['repositoryService', function(repository){
+	repository.init('colors');
+
 	this.color = {};
-	this.colors = colorService.list;
+	this.colors = repository.getAll('colors');
 
 	this.save = function(){
-		colorService.save(this.color);
+		repository.save('colors', this.color);
 		this.color = {};
 	};
 
@@ -13,6 +15,6 @@ app.controller('colorController', function(colorService){
 	};
 
 	this.delete = function(color){
-		colorService.delete(color);
+		repository.delete('colors', color);
 	}
-});
+}]);
