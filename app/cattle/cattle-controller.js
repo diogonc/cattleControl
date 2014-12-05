@@ -13,6 +13,7 @@ app.controller('cattleController', ['cattleRepository', 'raceRepository', 'color
 	this.save = function(property){
 		this.cattle.property = property;
 		cattleRepository.save(this.cattle);
+    this.cattle = {};
 	};
 
 	this.edit = function(cattle){

@@ -1,16 +1,8 @@
-app.controller('reportController', ['cattleRepository', 'fieldRepository', 'typeRepository', function(cattleRepository, fieldRepository, typeRepository){
+app.controller('reportController', ['$scope','cattleRepository', 'fieldRepository', 'typeRepository',
+ 							function($scope, cattleRepository, fieldRepository, typeRepository){
 	this.cattles = cattleRepository.list;
 	this.fields = fieldRepository.list;
 	this.types = typeRepository.list;
-
-	if(this.cattles == null)
-		this.cattles = [];
-
-	if(this.fields == null)
-		this.fields = [];
-
-	if(this.types == null)
-		this.types = [];
 
 	var report = function(fields, types, cattles){
 		var report = [];
@@ -38,4 +30,8 @@ app.controller('reportController', ['cattleRepository', 'fieldRepository', 'type
 	};
 
 	this.report = report(this.fields, this.types, this.cattles);
+
+	$scope.$watch(angular.bind(this, function (cattles) {
+		//this.report = report(fieldRepository.list, typeRepository.list, cattleRepository.list);
+	}));
 }]);
