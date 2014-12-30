@@ -5,7 +5,6 @@ app.factory('colorRepository', ['guidGenerator', 'localStorageService', function
     save: function(item){
       var index = service.list.indexOf(item);
       if(index < 0 ){
-        item.uuid = guidGenerator.generate();
         service.list.push(item);
       }else{
         service.list.splice(index, 1, item);

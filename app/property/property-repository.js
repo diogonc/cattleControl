@@ -5,7 +5,7 @@ app.factory('propertyRepository', ['guidGenerator', 'localStorageService', funct
     save: function(item){
       var index = service.list.indexOf(item);
       if(index < 0 ){
-        item.uuid = guidGenerator.generate();
+        item.id = guidGenerator.generate();
         service.list.push(item);
       }else{
         service.list.splice(index, 1, item);

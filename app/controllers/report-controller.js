@@ -32,6 +32,6 @@ app.controller('reportController', ['$scope','cattleRepository', 'fieldRepositor
 	this.report = report(this.fields, this.types, this.cattles);
 
 	$scope.$watch(angular.bind(this, function (cattles) {
-		//this.report = report(fieldRepository.list, typeRepository.list, cattleRepository.list);
+		// this.report = report(fieldRepository.list, typeRepository.list, cattleRepository.list);
 	}));
 }]);
